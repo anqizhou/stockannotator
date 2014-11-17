@@ -1,0 +1,17 @@
+<p>
+  <strong>Title:</strong>
+  <%= @annotation.title %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @annotation.date %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @annotation.content %>
+</p>
+
+<%= link_to 'Edit', edit_annotation_path(@annotation) %> |
+<%= link_to 'Back', annotations_path %>

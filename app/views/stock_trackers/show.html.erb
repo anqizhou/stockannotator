@@ -1,0 +1,12 @@
+<p>
+  <strong>Name:</strong>
+  <%= @stock_tracker.name %>
+</p>
+
+<p>
+  <strong>Ticker:</strong>
+  <%= @stock_tracker.ticker %>
+</p>
+
+<%= link_to 'Edit', edit_stock_tracker_path(@stock_tracker) %> |
+<%= link_to 'Back', stock_trackers_path %>
