@@ -3,10 +3,7 @@ Rails.application.routes.draw do
 
   resources :stock_trackers
 
-  resources :annotations, only: [:index, :show, :create] do
-    post  'submit'  , on: :collection
-    get   'data'    , on: :collection
-  end
+  resources :annotations
 
   devise_for :users
 

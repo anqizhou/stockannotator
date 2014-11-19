@@ -10,29 +10,62 @@
   </div>
   <div class="col-md-4 annotation" ng-controller="AnnotationController">
 
-    <div>My Notes</div>
+    <div><h2>My Notes</h2></div>
     <div class = "input_board">
-
       <form>
         Title: <input type="text" ng-model="title">
         <input type="date" ng-model="annodate">
         <textarea ng-model="annotation" name="annotation[content]" rows="8" cols="50" placeholder="Write your note here"></textarea>
         <!-- <textarea ng-model="annotation" name="annotation[content]" rows="10" cols="50" placeholder="Write your note here"></textarea> -->
         <input name="commit" type="submit" value="Add Note" ng-click="submitAnnotation()" >
-        <div>Title is {{title}}</div>
-        <div>Date is {{annodate}}</div>
-        <div>Annotation is {{annotation}}</div>
       </form>
     </div>
+<!--     <div>Title is {{title}}</div>
+    <div>Date is {{annodate}}</div>
+    <div>Annotation is {{annotation}}</div> -->
+    <div ng-repeat="object in stored_annotations">
+      <h3>{{object.title}}</h3>
+      <div>{{object.date}}</div>
+      <div>
+        <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteAnnotation(object.id)"></span>
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+      </div>
+      <div>{{object.content}}</div>
+    </div>
 
-<!--         <ul class="example-animate-container">
-          <li class="animate-repeat" ng-repeat="friend in friends | filter:q as results">
-           [{{$index + 1}}] {{friend.name}} who is {{friend.age}} years old.
-          </li>
-          <li class="animate-repeat" ng-if="results.length == 0">
-            <strong>No annotations found...</strong>
-          </li>
-        </ul>
+<!--
+            <ul ng-repeat="bday in bdays">
+                <li>{{bday.name}} | {{bday.date}}</li>
+            </ul>
+
+           <form ng-show="visible" ng-submit="newBirthday()">
+            <label>Name:</label>
+            <input type="text" ng-model="bdayname" placeholder="Name" ng-required/>
+            <label>Date:</label>
+            <input type="date" ng-model="bdaydate" placeholder="Date" ng-required/>
+            <br/>
+            <button class="btn" type="submit">Save</button>
+        </form>
+
+====
+            <ul ng-repeat="bday in bdays">
+                <li>
+                  <span ng-hide="editing" ng-click="editing = true">{{bday.name}} | {{bday.date}}</span>
+                  <form ng-show="editing" ng-submit="editing = false">
+                    <label>Name:</label>
+                    <input type="text" ng-model="bday.name" placeholder="Name" ng-required/>
+                    <label>Date:</label>
+                    <input type="date" ng-model="bday.date" placeholder="Date" ng-required/>
+                    <br/>
+                    <button class="btn" type="submit">Save</button>
+                  </form>
+                </li>
+
+            </ul>
+
+
  -->
+
+
   </div>
 </div>
