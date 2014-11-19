@@ -4,8 +4,30 @@
 
 Annotation = angular.module("myAnnotation", [])
 
-Annotation.controller("AnnotationCtrl", ["$scope", ($scope) ->
+Annotation.controller("AnnotationController", ["$scope", "$http", ($scope, $http) ->
 
-# Add posting actions here
+  $ ->
+    $http.get('/annotations.json')
+      .success (data) ->
+        console.log data
+      .error (data) ->
+        console.log data
+
+# Need to save each one as a variable and display
+
+
+  $scope.submitAnnotation = ->
+    jsonObj =  {
+        "title": $scope.title,
+        "date": $scope.annodate,
+        "content": $scope.annotation
+    }
+    $http.post('/annotations.json', jsonObj)
+      .success (data) ->
+        console.log data
+      .error (data) ->
+        console.log data
+
 
 ])
+

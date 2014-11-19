@@ -1,24 +1,38 @@
 <h1>StockAnnotator</h1>
 <p>A tool for personal investors to make annotations and journal entries so that they can <br> keep track of their thoughts and reasonings, and reflect on them at a later point.</p>
 
-<div class="row row">
+<div class="row">
   <div class="col-md-6 stock-chart">
     <div>Chart</div>
   </div>
   <div class="col-md-2 stock-ticker">
     <div>My Portfolio</div>
   </div>
-  <div class="col-md-4 annotation" ng-app="myAnnotation" ng-controller="AnnotationCtrl">
+  <div class="col-md-4 annotation" ng-controller="AnnotationController">
+
     <div>My Notes</div>
     <div class = "input_board">
 
       <form>
-<!-- Add title input -->
-        <input type="text">
-        <input type="date">
-        <textarea name="annotation[content]" rows="10" cols="50" placeholder="Write your note here"></textarea>
-        <input name="commit" type="submit" value="Add Note">
+        Title: <input type="text" ng-model="title">
+        <input type="date" ng-model="annodate">
+        <textarea ng-model="annotation" name="annotation[content]" rows="8" cols="50" placeholder="Write your note here"></textarea>
+        <!-- <textarea ng-model="annotation" name="annotation[content]" rows="10" cols="50" placeholder="Write your note here"></textarea> -->
+        <input name="commit" type="submit" value="Add Note" ng-click="submitAnnotation()" >
+        <div>Title is {{title}}</div>
+        <div>Date is {{annodate}}</div>
+        <div>Annotation is {{annotation}}</div>
       </form>
     </div>
+
+<!--         <ul class="example-animate-container">
+          <li class="animate-repeat" ng-repeat="friend in friends | filter:q as results">
+           [{{$index + 1}}] {{friend.name}} who is {{friend.age}} years old.
+          </li>
+          <li class="animate-repeat" ng-if="results.length == 0">
+            <strong>No annotations found...</strong>
+          </li>
+        </ul>
+ -->
   </div>
 </div>
