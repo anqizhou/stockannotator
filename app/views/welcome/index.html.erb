@@ -11,44 +11,39 @@
   <div class="col-md-4 annotation" ng-controller="AnnotationController">
 
     <div><h2>My Notes</h2></div>
+
+<!-- True inout board -->
     <div class = "input_board">
       <form>
         Title: <input type="text" ng-model="title">
         <input type="date" ng-model="annodate">
         <textarea ng-model="annotation" name="annotation[content]" rows="8" cols="50" placeholder="Write your note here"></textarea>
-        <!-- <textarea ng-model="annotation" name="annotation[content]" rows="10" cols="50" placeholder="Write your note here"></textarea> -->
         <input name="commit" type="submit" value="Add Note" ng-click="submitAnnotation()" >
       </form>
     </div>
-<!--     <div>Title is {{title}}</div>
-    <div>Date is {{annodate}}</div>
-    <div>Annotation is {{annotation}}</div> -->
+
+<!-- Displayed Data -->
     <div ng-repeat="object in stored_annotations">
-      <h3>{{object.title}}</h3>
-      <div>{{object.date}}</div>
-      <div>
-        <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteAnnotation(object.id)"></span>
-        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+      <div class="annotation_item" ng-hide="editing" ng-click="editing = true">
+        <h3>{{object.title}}</h3>
+        <div>{{object.date}}</div>
+        <div>
+          <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteAnnotation(object.id)"></span>
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        </div>
+        <div>{{object.content}}</div>
       </div>
-      <div>{{object.content}}</div>
+      <form ng-show="editing" ng-dblclick="editing = false; updateAnnotation()">
+        Title: <input type="text" ng-model="object.title">
+        <input type="text" ng-model="object.date">
+        <textarea ng-model="object.content" name="annotation[content]" rows="8" cols="50" placeholder="Write your note here"></textarea>
+<!--         <input name="commit" type="submit" value="Add Note" ng-click="submitAnnotation()"> -->
+      </form>
     </div>
+  </div>
+</div>
 
-<!--
-            <ul ng-repeat="bday in bdays">
-                <li>{{bday.name}} | {{bday.date}}</li>
-            </ul>
-
-           <form ng-show="visible" ng-submit="newBirthday()">
-            <label>Name:</label>
-            <input type="text" ng-model="bdayname" placeholder="Name" ng-required/>
-            <label>Date:</label>
-            <input type="date" ng-model="bdaydate" placeholder="Date" ng-required/>
-            <br/>
-            <button class="btn" type="submit">Save</button>
-        </form>
-
-====
-            <ul ng-repeat="bday in bdays">
+<!--             <ul ng-repeat="bday in bdays">
                 <li>
                   <span ng-hide="editing" ng-click="editing = true">{{bday.name}} | {{bday.date}}</span>
                   <form ng-show="editing" ng-submit="editing = false">
@@ -61,11 +56,5 @@
                   </form>
                 </li>
 
-            </ul>
+            </ul> -->
 
-
- -->
-
-
-  </div>
-</div>

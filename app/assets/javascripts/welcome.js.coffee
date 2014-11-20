@@ -39,6 +39,14 @@ Annotation.controller("AnnotationController", ["$scope", "$http", ($scope, $http
       .error (data) ->
         console.log data
 
+  $scope.submitAnnotation = ->
+    # debugger
+    $http.patch('/annotations.json', $scope.object)
+      .success (data) ->
+        console.log data
+        $scope.loadAnnotations()
+      .error (data) ->
+        console.log data
     # jsonObj =  {
     #     "title": $scope.title,
     #     "date": $scope.annodate,
