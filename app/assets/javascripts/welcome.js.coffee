@@ -9,13 +9,9 @@ Annotation.controller("AnnotationController", ["$scope", "$http", ($scope, $http
   $scope.loadAnnotations = ->
     $http.get('/annotations.json')
       .success (data) ->
-        console.log data
         $scope.stored_annotations = data
       .error (data) ->
-        console.log data
-
-
-# Need to save each one as a variable and display
+        console.log "Failed to get data."
 
 
   $scope.submitAnnotation = ->
@@ -26,27 +22,21 @@ Annotation.controller("AnnotationController", ["$scope", "$http", ($scope, $http
     }
     $http.post('/annotations.json', jsonObj)
       .success (data) ->
-        console.log data
         $scope.loadAnnotations()
-      .error (data) ->
-        console.log data
 
   $scope.deleteAnnotation = (id) ->
     $http.delete("/annotations/#{id}.json")
       .success (data) ->
-        console.log data
         $scope.loadAnnotations()
       .error (data) ->
-        console.log data
+        console.log "Failed to delete"
 
-  $scope.submitAnnotation = ->
-    # debugger
+  $scope.updateAnnotation = ->
     $http.patch('/annotations.json', $scope.object)
       .success (data) ->
-        console.log data
         $scope.loadAnnotations()
       .error (data) ->
-        console.log data
+        console.log "Failed to update"
     # jsonObj =  {
     #     "title": $scope.title,
     #     "date": $scope.annodate,
