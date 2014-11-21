@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  resources :stocks
+
   resources :stock_trackers
 
   resources :annotations
