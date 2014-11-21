@@ -50,12 +50,12 @@
 
 <!-- Displayed Data -->
     <div ng-repeat="object in stored_annotations">
-      <div class="annotation_item" ng-hide="editing" ng-click="editing = true">
+      <div class="annotation_item" ng-hide="editing">
         <h3>{{object.title}}</h3>
         <div>{{object.date}}</div>
         <div>
           <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteAnnotation(object.id)"></span>
-          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+          <span class="glyphicon glyphicon-edit" aria-hidden="true" ng-click="editing = true"></span>
         </div>
         <div>{{object.content}}</div>
       </div>
