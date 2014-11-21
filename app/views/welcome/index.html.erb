@@ -5,12 +5,38 @@
   <div class="col-md-6 stock-chart">
     <div>Chart</div>
   </div>
-  <div class="col-md-2 stock-ticker">
+
+  <div class="col-md-2 stock-ticker" ng-controller="StockController">
     <div>My Portfolio</div>
+
+    <div class = "input_board">
+      <form>
+        Ticker: <input type="text" ng-model="stock">
+        <input name="commit" type="submit" value="Add Stock" ng-click="submitStock()" >
+      </form>
+    </div>
+
+    <div ng-repeat="object in stored_stocks">
+      <div class="stock_item" ng-hide="editing">
+        <div>
+          <input type="checkbox" ng-model="display">
+          {{object.ticker}}
+          <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteStock(object.id)"></span>
+          <span class="glyphicon glyphicon-edit" aria-hidden="true" ng-click="editing = true"></span>
+        </div>
+      </div>
+      <form ng-show="editing" ng-dblclick="editing = false; updateStock(object)">
+        Ticker: <input type="text" ng-model="object.ticker">
+      </form>
+    </div>
+
   </div>
+
+<!-- My Annotations -->
+
   <div class="col-md-4 annotation" ng-controller="AnnotationController">
 
-    <div><h2>My Notes</h2></div>
+    <div>My Notes</div>
 
 <!-- True inout board -->
     <div class = "input_board">

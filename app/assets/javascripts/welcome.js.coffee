@@ -13,7 +13,6 @@ Annotation.controller("AnnotationController", ["$scope", "$http", ($scope, $http
       .error (data) ->
         console.log "Failed to get data."
 
-
   $scope.submitAnnotation = ->
     jsonObj =  {
         "title": $scope.title,
@@ -44,4 +43,42 @@ Annotation.controller("AnnotationController", ["$scope", "$http", ($scope, $http
     # }
   $scope.loadAnnotations()
 ])
+
+
+Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
+
+  $scope.loadStocks = ->
+    $http.get('/stocks.json')
+      .success (data) ->
+        $scope.stored_stocks = data
+      .error (data) ->
+        console.log "Failed to get data."
+
+  $scope.submitStock = ->
+    jsonObj =  {
+        "ticker": $scope.stock
+    }
+    $http.post('/stocks.json', jsonObj)
+      .success (data) ->
+        $scope.loadStocks()
+
+  $scope.deleteStock = (id) ->
+    $http.delete("/stocks/#{id}.json")
+      .success (data) ->
+        $scope.loadStocks()
+      .error (data) ->
+        console.log "Failed to delete"
+
+  $scope.updateStock = (object) ->
+    $http.patch(object.url, object)
+      .success (data) ->
+        $scope.stock()
+    .error (data) ->
+        console.log "Failed to update"
+    jsonObj =  {
+        "ticker": $scope.stock
+    }
+  $scope.loadStocks()
+])
+
 
