@@ -2,7 +2,8 @@ class AnnotationsController < ApplicationController
   before_action :set_annotation, only: [:show, :edit, :update, :destroy]
 
   def index
-    @annotations = Annotation.all
+    # Phrase it this way to allow for logged-out users
+    @annotations = Annotation.where(user: current_user).order(date: :desc)
     respond_with(@annotations)
   end
 
@@ -20,6 +21,7 @@ class AnnotationsController < ApplicationController
 
   def create
     @annotation = Annotation.new(annotation_params)
+    @annotation.user = current_user
     @annotation.save
     respond_with(@annotation)
   end
