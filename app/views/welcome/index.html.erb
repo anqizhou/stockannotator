@@ -1,8 +1,46 @@
 <h1>StockAnnotator</h1>
 <p>A tool for personal investors to make annotations and journal entries so that they can <br> keep track of their thoughts and reasonings, and reflect on them at a later point.</p>
 
-<div class="row row">
-  <div class="col-md-8 stock-chart">.col-md-8</div>
-  <div class="col-md-2 stock-ticker">.col-md-2</div>
-  <div class="col-md-2 annotation">.col-md-2</div>
+<div class="row">
+  <div class="col-md-6 stock-chart">
+    <div>Chart</div>
+  </div>
+  <div class="col-md-2 stock-ticker">
+    <div>My Portfolio</div>
+  </div>
+  <div class="col-md-4 annotation" ng-controller="AnnotationController">
+
+    <div><h2>My Notes</h2></div>
+
+<!-- True inout board -->
+    <div class = "input_board">
+      <form>
+        Title: <input type="text" ng-model="title">
+        <input type="date" ng-model="annodate">
+        <textarea ng-model="annotation" name="annotation[content]" rows="8" cols="50" placeholder="Write your note here"></textarea>
+        <input name="commit" type="submit" value="Add Note" ng-click="submitAnnotation()" >
+      </form>
+    </div>
+
+<!-- Displayed Data -->
+    <div ng-repeat="object in stored_annotations">
+      <div class="annotation_item" ng-hide="editing" ng-click="editing = true">
+        <h3>{{object.title}}</h3>
+        <div>{{object.date}}</div>
+        <div>
+          <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteAnnotation(object.id)"></span>
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+        </div>
+        <div>{{object.content}}</div>
+      </div>
+      <form ng-show="editing" ng-dblclick="editing = false; updateAnnotation()">
+        Title: <input type="text" ng-model="object.title">
+        <input type="text" ng-model="object.date">
+        <textarea ng-model="object.content" name="annotation[content]" rows="8" cols="50" placeholder="Write your note here"></textarea>
+      </form>
+    </div>
+  </div>
 </div>
+
+
+
