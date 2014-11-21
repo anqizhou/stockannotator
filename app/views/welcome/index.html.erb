@@ -33,7 +33,7 @@
         </div>
         <div>{{object.content}}</div>
       </div>
-      <form ng-show="editing" ng-dblclick="editing = false; updateAnnotation()">
+      <form ng-show="editing" ng-dblclick="editing = false; updateAnnotation(object)">
         Title: <input type="text" ng-model="object.title">
         <input type="text" ng-model="object.date">
         <textarea ng-model="object.content" name="annotation[content]" rows="8" cols="50" placeholder="Write your note here"></textarea>

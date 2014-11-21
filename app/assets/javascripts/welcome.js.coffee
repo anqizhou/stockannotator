@@ -31,8 +31,8 @@ Annotation.controller("AnnotationController", ["$scope", "$http", ($scope, $http
       .error (data) ->
         console.log "Failed to delete"
 
-  $scope.updateAnnotation = ->
-    $http.patch('/annotations.json', $scope.object)
+  $scope.updateAnnotation = (object) ->
+    $http.patch(object.url, object)
       .success (data) ->
         $scope.loadAnnotations()
       .error (data) ->
