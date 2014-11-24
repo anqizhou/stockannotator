@@ -3,6 +3,7 @@ class PricesController < ApplicationController
 
   def index
     @prices = Price.all
+    binding.pry
     respond_with(@prices)
   end
 
