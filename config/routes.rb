@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'prices/load' => 'prices#load'
 
   resources :prices
 

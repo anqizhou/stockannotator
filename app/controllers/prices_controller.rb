@@ -3,7 +3,6 @@ class PricesController < ApplicationController
 
   def index
     @prices = Price.all
-    binding.pry
     respond_with(@prices)
   end
 
@@ -34,6 +33,21 @@ class PricesController < ApplicationController
     @price.destroy
     respond_with(@price)
   end
+
+# Define get data
+  def load
+#Experiment with Yahoo finance API
+    binding.pry
+    @stocks = Stock.all
+    @stocks.each do |i|
+      data = YahooFinance.historical_quotes(i.ticker, Time::now-(24*60*60*3650), Time::now, { raw: false, period: :daily })
+      data.each do |j|
+        Price.create(close_date:j.trade_date, close_price:j.close, stock_id:i.id)
+      end
+    end
+#Experiment with Yahoo finance above
+  end
+
 
   private
     def set_price

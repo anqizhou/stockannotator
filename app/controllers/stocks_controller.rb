@@ -1,9 +1,13 @@
+
+
 class StocksController < ApplicationController
   before_action :set_stock, only: [:show, :edit, :update, :destroy]
 
   def index
     @stocks = Stock.all
     # @stocks = Stock.where(user: current_user)
+
+
     respond_with(@stocks)
   end
 
