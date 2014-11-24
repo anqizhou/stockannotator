@@ -26,6 +26,9 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 
 gem 'angularjs-rails', '~> 1.3'
 
+# Use Yahoo Finance Wrapper https://github.com/herval/yahoo-finance
+gem 'yahoo-finance'
+
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
