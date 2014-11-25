@@ -10,9 +10,9 @@
     <div>My Portfolio</div>
 
     <div class = "input_board">
-      <form>
+      <form ng-submit="submitStock(); saveData()">
         Ticker: <input type="text" ng-model="stock">
-        <input name="commit" type="submit" value="Add Stock" ng-click="submitStock()" >
+        <input name="commit" type="submit" value="Add Stock">
       </form>
     </div>
 

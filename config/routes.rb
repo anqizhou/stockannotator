@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'prices/load' => 'prices#load'
+  get 'prices/load/:ticker' => 'prices#load'
 
   resources :prices
 

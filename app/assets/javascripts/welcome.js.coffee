@@ -78,6 +78,17 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
     jsonObj =  {
         "ticker": $scope.stock
     }
+
+
+  $scope.saveData = (ticker) ->
+    console.log $scope.stock
+    $http.get("/prices/load/#{$scope.stock}.json")
+      .success (data) ->
+        console.log "Data saved."
+      .error (data) ->
+        console.log "Failed to save."
+
+
   $scope.loadStocks()
 ])
 
