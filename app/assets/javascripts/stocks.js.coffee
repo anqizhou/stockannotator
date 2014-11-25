@@ -4,7 +4,7 @@
 
 
 $ ->
-  $.getJSON "http://localhost:3000/price.json", (data) ->
+  $.getJSON "/price.json", (data) ->
 
     # Create the chart
     $("#container").highcharts "StockChart",

@@ -4,7 +4,8 @@ class StocksController < ApplicationController
   before_action :set_stock, only: [:show, :edit, :update, :destroy]
 
   def price
-    @prices = Price.all
+    # Only showing one
+    @prices = Price.where(stock_id: 1).order(close_date: :asc)
 
     @price_array = []
 
@@ -12,6 +13,8 @@ class StocksController < ApplicationController
       @price_array.push [p.close_date.to_time.to_i * 1000, p.close_price]
 
     end
+    puts @price_array.count
+    @price_array
   end
 
 
