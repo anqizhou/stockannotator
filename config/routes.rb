@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  resources :prices
+
   resources :stocks
 
   resources :stock_trackers

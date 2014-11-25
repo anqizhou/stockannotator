@@ -15,6 +15,7 @@ class StocksController < ApplicationController
 
   def index
     @stocks = Stock.all
+    # @stocks = Stock.where(user: current_user)
     respond_with(@stocks)
   end
 
@@ -32,6 +33,7 @@ class StocksController < ApplicationController
 
   def create
     @stock = Stock.new(stock_params)
+    # @stock.user = current_user
     @stock.save
     respond_with(@stock)
   end
