@@ -46,6 +46,7 @@ Annotation.controller("AnnotationController", ["$scope", "$http", ($scope, $http
 
 
 Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
+  $scope.hideLoadingButton = true
 
   $scope.loadStocks = ->
     $http.get('/stocks.json')
@@ -55,6 +56,7 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
         console.log "Failed to get data."
 
   $scope.submitStock = ->
+    $scope.hideLoadingButton = false
     jsonObj =  {
         "ticker": $scope.stock
     }
@@ -84,6 +86,7 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
     console.log $scope.stock
     $http.get("/prices/load/#{$scope.stock}.json")
       .success (data) ->
+        $scope.hideLoadingButton = true
         console.log "Data saved."
       .error (data) ->
         console.log "Failed to save."
