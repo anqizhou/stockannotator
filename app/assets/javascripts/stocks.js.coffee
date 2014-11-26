@@ -3,24 +3,52 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-$ ->
-  $.getJSON "/price.json", (data) ->
+@displayChart = (tickersArray) ->
+  console.log "display data", tickersArray
 
-    # Create the chart
+  seriesOptions = []
+  seriesCounter = 0
+  names = tickersArray
+
+  # create the chart when all data is loaded
+  createChart = ->
     $("#container").highcharts "StockChart",
       rangeSelector:
         selected: 1
 
-      title:
-        text: "STOCK PRICE"
+      yAxis:
+        labels:
+          formatter: ->
+            ((if @value > 0 then " + " else "")) + @value + "%"
 
-      series: [
-        name: "DUMMY"
-        data: data
-        tooltip:
-          valueDecimals: 2
-      ]
+        plotLines: [
+          value: 0
+          width: 2
+          color: "silver"
+        ]
+
+      plotOptions:
+        series:
+          compare: "percent"
+
+      tooltip:
+        pointFormat: "<span style=\"color:{series.color}\">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>"
+        valueDecimals: 2
+
+      series: seriesOptions
 
     return
 
+  $.each names, (i, name) ->
+    $.getJSON "/prices/#{name}.json", (data) ->
+      seriesOptions[i] =
+        name: name
+        data: data
+      seriesCounter += 1
+
+      if seriesCounter == names.length
+        createChart()
+      return
+
+    return
   return

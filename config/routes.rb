@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'prices/load/:ticker' => 'prices#load'
+  get 'prices/:ticker' => 'stocks#price'
 
   resources :prices
 
@@ -12,7 +13,6 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  get 'price' => 'stocks#price'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

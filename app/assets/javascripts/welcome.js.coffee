@@ -88,9 +88,20 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
       .error (data) ->
         console.log "Failed to save."
 
+  $scope.refreshChart = ->
+    checked_tickers = []
+
+    for stock in $scope.stored_stocks
+      if stock.checked is true
+        console.log stock.ticker
+        checked_tickers.push stock.ticker
+    console.log checked_tickers
+    displayChart(checked_tickers)
+
 
   $scope.loadStocks()
 ])
+
 
 
 # HighChart Stocks

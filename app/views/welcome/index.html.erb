@@ -19,7 +19,7 @@
     <div ng-repeat="object in stored_stocks">
       <div class="stock_item" ng-hide="editing">
         <div>
-          <input type="checkbox" ng-model="display">
+          <input type="checkbox" ng-model="object.checked">
           {{object.ticker}}
           <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteStock(object.id)"></span>
           <span class="glyphicon glyphicon-edit" aria-hidden="true" ng-click="editing = true"></span>
@@ -29,6 +29,8 @@
         Ticker: <input type="text" ng-model="object.ticker">
       </form>
     </div>
+
+    <button type="button" class="btn btn-default" ng-click="refreshChart()">Refresh Chart</button>
 
   </div>
 

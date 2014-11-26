@@ -5,7 +5,9 @@ class StocksController < ApplicationController
 
   def price
     # Only showing one
-    @prices = Price.where(stock_id: 1).order(close_date: :asc)
+    @displayStock = Stock.where(ticker:params[:ticker])
+    @stockid = @displayStock.first.id
+    @prices = Price.where(stock_id: @stockid).order(close_date: :asc)
 
     @price_array = []
 
