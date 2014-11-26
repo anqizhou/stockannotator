@@ -52,6 +52,7 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
     $http.get('/stocks.json')
       .success (data) ->
         $scope.stored_stocks = data
+        $scope.loadCheckedtickers()
       .error (data) ->
         console.log "Failed to get data."
 
@@ -101,6 +102,17 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
     console.log checked_tickers
     displayChart(checked_tickers)
 
+    # Try the localstorage feature below
+    localStorage.setItem("list", checked_tickers)
+
+
+  $scope.loadCheckedtickers = ->
+    storedList = localStorage.getItem("list")
+    storedListArray = storedList.split(",")
+    for stock in $scope.stored_stocks
+      if stock.ticker in storedListArray is true
+        stock.checked = true
+    displayChart(storedListArray)
 
   $scope.loadStocks()
 ])
