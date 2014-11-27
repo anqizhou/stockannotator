@@ -51,10 +51,13 @@
 
 <!-- Displays Data -->
   <div class="search">
-    <input type="search" ng-model="search" placeholder="Search...">
+
 
   </div>
   <div class="col-md-7 show-annotation">
+    <div class="col-md-7 search">
+      <input type="search" ng-model="search" placeholder="Search...">
+    </div>
     <div ng-repeat="object in stored_annotations | filter:search">
       <div class="annotation_item" ng-hide="editing">
         <h3>{{object.title}}</h3>
