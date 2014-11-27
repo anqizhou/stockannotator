@@ -111,15 +111,17 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
 
   $scope.loadCheckedtickers = ->
     storedList = localStorage.getItem("list")
-    storedListArray = storedList.split(",")
-    for stock in $scope.stored_stocks
-      if stock.ticker in storedListArray is true
-        stock.checked = true
-    $http.get('/annotations.json?order=asc')
-      .success (data) ->
-        displayChart(storedListArray, data)
-      .error (data) ->
-        console.log "Failed to get data."
+    if storedList != null
+      storedListArray = storedList.split(",")
+
+      for stock in $scope.stored_stocks
+        if stock.ticker in storedListArray is true
+          stock.checked = true
+      $http.get('/annotations.json?order=asc')
+        .success (data) ->
+          displayChart(storedListArray, data)
+        .error (data) ->
+          console.log "Failed to get data."
 
 
   $scope.loadStocks()

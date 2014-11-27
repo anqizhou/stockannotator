@@ -13,6 +13,7 @@
         <input name="commit" type="submit" value="Add Stock">
       </form>
     </div>
+    <div id="tickerLoadingMsg" ng-hide="hideLoadingButton"><img src="assets/ajax-loader.gif" alt="loading"></div>
 
     <div ng-repeat="object in stored_stocks">
       <div class="stock_item" ng-hide="editing">

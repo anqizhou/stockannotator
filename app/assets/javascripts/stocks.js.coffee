@@ -52,6 +52,8 @@
     return
 
   $.each names, (i, name) ->
+    return if name == ''
+
     $.getJSON "/prices/#{name}.json", (data) ->
       seriesOptions[i] =
         name: name
