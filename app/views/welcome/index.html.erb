@@ -1,21 +1,18 @@
 <h1>StockAnnotator</h1>
 <p>A tool for personal investors to make annotations and journal entries so that they can <br> keep track of their thoughts and reasonings, and reflect on them at a later point.</p>
 <hr>
-<div class="row">
-  <div class="col-md-6 stock-chart">
+<div class="row" ng-controller="StockController">
+  <div class="col-md-9 stock-chart">
     <div id="container" style="height: 400px; min-width: 310px"></div>
   </div>
-
-  <div class="col-md-2 stock-ticker" ng-controller="StockController">
-    <div>My Portfolio</div>
-
-    <div class = "input_board">
-      <form ng-submit="submitStock(); saveData()">
-        Ticker: <input type="text" ng-model="stock">
+  <br>
+  <div class="col-md-3 stock-ticker">
+    <div class="input_board">
+      <form class="insert-ticker" ng-submit="submitStock(); saveData()">
+        <input type="text" ng-model="stock" placeholder="Ticker symbol">
         <input name="commit" type="submit" value="Add Stock">
       </form>
     </div>
-    <div id="tickerLoadingMsg" ng-hide="hideLoadingButton"><img src="assets/ajax-loader.gif" alt="loading"></div>
 
     <div ng-repeat="object in stored_stocks">
       <div class="stock_item" ng-hide="editing">
@@ -27,49 +24,56 @@
         </div>
       </div>
       <form ng-show="editing" ng-dblclick="editing = false; updateStock(object)">
-        Ticker: <input type="text" ng-model="object.ticker">
+        <input type="text" ng-model="object.ticker">
       </form>
     </div>
 
     <button type="button" class="btn btn-default" ng-click="refreshChart()">Refresh Chart</button>
 
   </div>
-
+</div>
+<hr>
 <!-- My Annotations -->
-
-  <div class="col-md-4 annotation" ng-controller="AnnotationController">
-
-    <div>My Notes</div>
+<div class="row below" ng-controller="AnnotationController">
+  <div class="col-md-3 annotation">
 
 <!-- True inout board -->
-    <div class = "input_board">
+    <div class="input_board user-annotations">
       <form>
-        Title: <input type="text" ng-model="title">
+        <br>
+        <input type="text" ng-model="title" placeholder="Title...">
+        <br><br>
         <input type="date" ng-model="annodate">
-        <textarea ng-model="annotation" name="annotation[content]" rows="8" cols="50" placeholder="Write your note here"></textarea>
-        <input name="commit" type="submit" value="Add Note" ng-click="submitAnnotation()" >
+        <br><br>
+        <textarea ng-model="annotation" name="annotation[content]" rows="12" cols="40" placeholder="Write your note here..."></textarea>
+        <br>
+        <input name="commit" type="submit" value="Add Note" ng-click="submitAnnotation()">
+
       </form>
     </div>
+  </div>
 
-<!-- Displayed Data -->
-    <div ng-repeat="object in stored_annotations">
+<!-- Displays Data -->
+  <div class="search">
+    <input type="search" ng-model="search" placeholder="Search...">
+
+  </div>
+  <div class="col-md-7 show-annotation">
+    <div ng-repeat="object in stored_annotations | filter:search">
       <div class="annotation_item" ng-hide="editing">
         <h3>{{object.title}}</h3>
         <div>{{object.date}}</div>
-        <div>
-          <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteAnnotation(object.id)"></span>
-          <span class="glyphicon glyphicon-edit" aria-hidden="true" ng-click="editing = true"></span>
-        </div>
+        <br>
         <div>{{object.content}}</div>
+        <hr>
+        <span class="glyphicon glyphicon-remove" aria-hidden="true" ng-click="deleteAnnotation(object.id)"></span>
+        <span class="glyphicon glyphicon-edit" aria-hidden="true" ng-click="editing = true"></span>
       </div>
       <form ng-show="editing" ng-dblclick="editing = false; updateAnnotation(object)">
-        Title: <input type="text" ng-model="object.title">
+        <input type="text" ng-model="object.title" >
         <input type="text" ng-model="object.date">
         <textarea ng-model="object.content" name="annotation[content]" rows="8" cols="50" placeholder="Write your note here"></textarea>
       </form>
     </div>
   </div>
 </div>
-
-
-

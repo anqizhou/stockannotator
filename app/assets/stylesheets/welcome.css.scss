@@ -9,7 +9,53 @@ body {
   padding: $nav-top;
 }
 
-.row {
+.stock-chart{
+  background-color: white;
+}
+
+.stock-ticker{
   background-color: #eee;
+  height: 300px;
+}
+
+.btn-default {
+  margin-bottom: 15px;
+}
+
+.stock_item {
+  float: top;
+}
+
+.below{
+  background-color: white;
   height: 400px;
+}
+
+.annotation {
+  background-color: gray;
+}
+
+.annotation_item {
+  background-color: #eee;
+}
+
+.show-annotation {
+  background-color: white;
+}
+
+.insert-ticker {
+  margin-top: 15px;
+}
+
+.input_board {
+}
+
+.user-annotations {
+  height: 400px;
+}
+
+.search {
+  width: 16.66666667%;
+  padding-top: 20px;
+  float: right;
 }
