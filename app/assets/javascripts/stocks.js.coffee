@@ -3,8 +3,19 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-@displayChart = (tickersArray) ->
+@displayChart = (tickersArray, annotations) ->
   console.log "display data", tickersArray
+  console.log annotations
+
+  annotation_flags = []
+  for singleAnnotation in annotations
+    objectFlag = {
+              x: Date.parse(singleAnnotation.date)
+              title: singleAnnotation.title
+            }
+    annotation_flags.push objectFlag
+
+
 
   seriesOptions = []
   seriesCounter = 0
@@ -44,9 +55,28 @@
       seriesOptions[i] =
         name: name
         data: data
+
+
+        # type: 'flags'
+        # name: 'Flags on axis'
+        # data = [
+        #     x: Date.UTC(2014, 2, 1)
+        #     title: "Flag 1"
+        #   ,
+
+        #     x: Date.UTC(2014, 3, 1)
+        #     title: "Flag 2"
+        # ]
+        # shape: "squarepin"
       seriesCounter += 1
 
       if seriesCounter == names.length
+        obj1 =
+          type: 'flags'
+          name: 'Flags on axis'
+          data: annotation_flags
+        seriesOptions.push obj1
+        console.log "stored annotations in stocks" + @stored_annotations_passing
         createChart()
       return
 

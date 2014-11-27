@@ -3,7 +3,11 @@ class AnnotationsController < ApplicationController
 
   def index
     # Phrase it this way to allow for logged-out users
-    @annotations = Annotation.where(user: current_user).order(date: :desc)
+    if params[:order] == 'asc'
+      @annotations = Annotation.where(user: current_user).order(date: :asc)
+    else
+      @annotations = Annotation.where(user: current_user).order(date: :desc)
+    end
     respond_with(@annotations)
   end
 
