@@ -21,10 +21,8 @@ class StocksController < ApplicationController
 
 
   def index
-    @stocks = Stock.all
-    # @stocks = Stock.where(user: current_user)
-
-
+    #In many to many relationships, need to do current_user.stocks rather than Stock.user because one stock has many users.
+    @stocks = current_user.stocks
     respond_with(@stocks)
   end
 
@@ -42,8 +40,9 @@ class StocksController < ApplicationController
 
   def create
     @stock = Stock.new(stock_params)
-    # @stock.user = current_user
     @stock.save
+    #Save the new data entry into current user's portfolio (ie current_user.stocks)
+    current_user.stocks << @stock
     respond_with(@stock)
   end
 
