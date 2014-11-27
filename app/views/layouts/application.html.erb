@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Stockannotator</title>
+  <title>$tockAnnotator</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
   <%= stylesheet_link_tag    'application', media: 'all' %>
-  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body ng-app="myAnnotation">
@@ -19,7 +19,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">StockAnnotator</a>
+      <a class="navbar-brand" href="/"><i class="fa fa-usd fa-spin"></i> tockAnnotator</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -54,10 +54,9 @@
 
 <%= yield %>
 
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-  <script src="http://code.highcharts.com/stock/highstock.js"></script>
-  <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
-
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag '//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js' %>
+  <%= javascript_include_tag '//code.highcharts.com/stock/highstock.js' %>
+  <%= javascript_include_tag '//code.highcharts.com/stock/modules/exporting.js' %>
 </body>
 </html>
