@@ -116,10 +116,3 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
 
   $scope.loadStocks()
 ])
-
-
-
-# HighChart Stocks
-
-
-
