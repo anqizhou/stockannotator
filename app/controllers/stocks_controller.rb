@@ -1,5 +1,3 @@
-
-
 class StocksController < ApplicationController
   before_action :set_stock, only: [:show, :edit, :update, :destroy]
 
@@ -13,9 +11,8 @@ class StocksController < ApplicationController
 
     @prices.each do |p|
       @price_array.push [p.close_date.to_time.to_i * 1000, p.close_price]
-
     end
-    puts @price_array.count
+
     @price_array
   end
 

@@ -34,10 +34,7 @@ class PricesController < ApplicationController
     respond_with(@price)
   end
 
-# Define get data
   def load
-#Experiment with Yahoo finance API. Need to select a paticular one
-##########
     @stocks = Stock.where(ticker:params[:ticker])
     @stocks.each do |i|
       data = YahooFinance.historical_quotes(i.ticker, Time::now-(24*60*60*3650), Time::now, { raw: false, period: :daily })
@@ -45,7 +42,6 @@ class PricesController < ApplicationController
         Price.create(close_date:j.trade_date, close_price:j.close, stock_id:i.id)
       end
     end
-#Experiment with Yahoo finance above
   end
 
 

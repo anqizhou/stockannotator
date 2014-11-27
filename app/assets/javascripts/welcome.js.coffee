@@ -14,11 +14,11 @@ Annotation.controller("AnnotationController", ["$scope", "$http", ($scope, $http
         console.log "Failed to get data."
 
   $scope.submitAnnotation = ->
-    jsonObj =  {
-        "title": $scope.title,
-        "date": $scope.annodate,
-        "content": $scope.annotation
-    }
+    jsonObj =
+      title: $scope.title,
+      date: $scope.annodate,
+      content: $scope.annotation
+
     $http.post('/annotations.json', jsonObj)
       .success (data) ->
         $scope.loadAnnotations()
@@ -36,11 +36,7 @@ Annotation.controller("AnnotationController", ["$scope", "$http", ($scope, $http
         $scope.loadAnnotations()
       .error (data) ->
         console.log "Failed to update"
-    # jsonObj =  {
-    #     "title": $scope.title,
-    #     "date": $scope.annodate,
-    #     "content": $scope.annotation
-    # }
+
   $scope.loadAnnotations()
 ])
 
@@ -58,9 +54,9 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
 
   $scope.submitStock = ->
     $scope.hideLoadingButton = false
-    jsonObj =  {
-        "ticker": $scope.stock
-    }
+    jsonObj =
+      ticker: $scope.stock
+
     $http.post('/stocks.json', jsonObj)
       .success (data) ->
         $scope.loadStocks()
@@ -72,23 +68,11 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
       .error (data) ->
         console.log "Failed to delete"
 
-  $scope.updateStock = (object) ->
-    $http.patch(object.url, object)
-      .success (data) ->
-        $scope.stock()
-    .error (data) ->
-        console.log "Failed to update"
-    jsonObj =  {
-        "ticker": $scope.stock
-    }
-
-
   $scope.saveData = (ticker) ->
     console.log $scope.stock
     $http.get("/prices/load/#{$scope.stock}.json")
       .success (data) ->
         $scope.hideLoadingButton = true
-        console.log "Data saved."
       .error (data) ->
         console.log "Failed to save."
 
@@ -97,27 +81,29 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
 
     for stock in $scope.stored_stocks
       if stock.checked is true
-        console.log stock.ticker
         checked_tickers.push stock.ticker
-    console.log checked_tickers
-    $http.get('/annotations.json?order=asc')
-      .success (data) ->
-        displayChart(checked_tickers, data)
-      .error (data) ->
-        console.log "Failed to get data."
+
+    $scope.sendToDisplay(checked_tickers)
+
     # Try the localstorage feature below
     localStorage.setItem("list", checked_tickers)
 
 
   $scope.loadCheckedtickers = ->
     storedList = localStorage.getItem("list")
-    storedListArray = storedList.split(",")
-    for stock in $scope.stored_stocks
-      if stock.ticker in storedListArray is true
-        stock.checked = true
+    if storedList != null
+      storedListArray = storedList.split(",")
+
+      for stock in $scope.stored_stocks
+        if stock.ticker in storedListArray is true
+          stock.checked = true
+
+      $scope.sendToDisplay(storedListArray)
+
+  $scope.sendToDisplay = (tickers) ->
     $http.get('/annotations.json?order=asc')
       .success (data) ->
-        displayChart(storedListArray, data)
+        displayChart(tickers, data)
       .error (data) ->
         console.log "Failed to get data."
 
