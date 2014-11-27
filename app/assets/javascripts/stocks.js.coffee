@@ -9,6 +9,7 @@
 
   annotation_flags = []
   for singleAnnotation in annotations
+    console.log Date.parse(singleAnnotation.date)
     objectFlag = {
               x: Date.parse(singleAnnotation.date)
               title: singleAnnotation.title
@@ -56,25 +57,18 @@
         name: name
         data: data
 
-
-        # type: 'flags'
-        # name: 'Flags on axis'
-        # data = [
-        #     x: Date.UTC(2014, 2, 1)
-        #     title: "Flag 1"
-        #   ,
-
-        #     x: Date.UTC(2014, 3, 1)
-        #     title: "Flag 2"
-        # ]
-        # shape: "squarepin"
       seriesCounter += 1
 
       if seriesCounter == names.length
         obj1 =
           type: 'flags'
-          name: 'Flags on axis'
+          # name: ''
           data: annotation_flags
+          tooltip:
+            dateTimeLabelFormats:
+              day: "%b %e, %Y"
+            pointFormat: ""
+            valueDecimals: 1
         seriesOptions.push obj1
         console.log "stored annotations in stocks" + @stored_annotations_passing
         createChart()
