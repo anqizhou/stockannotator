@@ -4,19 +4,14 @@
 
 
 @displayChart = (tickersArray, annotations) ->
-  console.log "display data", tickersArray
-  console.log annotations
-
   annotation_flags = []
   for singleAnnotation in annotations
     console.log Date.parse(singleAnnotation.date)
-    objectFlag = {
-              x: Date.parse(singleAnnotation.date)
-              title: singleAnnotation.title
-            }
+    objectFlag =
+      x: Date.parse(singleAnnotation.date)
+      title: singleAnnotation.title
+
     annotation_flags.push objectFlag
-
-
 
   seriesOptions = []
   seriesCounter = 0
@@ -62,17 +57,15 @@
       seriesCounter += 1
 
       if seriesCounter == names.length
-        obj1 =
+        obj =
           type: 'flags'
-          # name: ''
           data: annotation_flags
           tooltip:
             dateTimeLabelFormats:
               day: "%b %e, %Y"
             pointFormat: ""
             valueDecimals: 1
-        seriesOptions.push obj1
-        console.log "stored annotations in stocks" + @stored_annotations_passing
+        seriesOptions.push obj
         createChart()
       return
 
