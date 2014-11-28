@@ -51,6 +51,7 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
     $http.get('/stocks.json')
       .success (data) ->
         $scope.stored_stocks = data
+        console.log "checking loadStocks function"
         $scope.loadCheckedtickers()
       .error (data) ->
         console.log "Failed to get data."
@@ -86,13 +87,15 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
       if stock.checked is true
         checked_tickers.push stock.ticker
 
+    # Check this block
+
     console.log checked_tickers.length
     if checked_tickers.length == 0
       console.log "count 0"
-      $scope.checked = true
+      $scope.checked = false
     else
       console.log "count more"
-      $scope.checked = false
+      $scope.checked = true
     $scope.sendToDisplay(checked_tickers)
 
     # Try the localstorage feature below
@@ -101,6 +104,7 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
 
   $scope.loadCheckedtickers = ->
     storedList = localStorage.getItem("list")
+    console.log "checking reloading local storage item" + storedList
     if storedList != null
       storedListArray = storedList.split(",")
 
@@ -121,5 +125,5 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
   $scope.loadStocks()
 ])
 
-$ ->
+# $ ->
 

@@ -1,8 +1,8 @@
 <div class="row" ng-controller="StockController">
-  <div class="col-md-9" id="logged-out-stock-chart" ng-show="checked">
+  <div class="col-md-9" id="logged-out-stock-chart" ng-hide="checked">
     ADD STOCKS<br> CLICK <strong>REFRESH CHART</strong>
   </div>
-  <div class="col-md-9 stock-chart" ng-hide="checked">
+  <div class="col-md-9 stock-chart" ng-show="checked">
     <div id="container" style="height: 400px; min-width: 310px"></div>
   </div>
   <br>
