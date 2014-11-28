@@ -5,11 +5,14 @@
 Annotation = angular.module("myAnnotation", [])
 
 Annotation.controller("AnnotationController", ["$scope", "$http", ($scope, $http) ->
-
   $scope.loadAnnotations = ->
     $http.get('/annotations.json')
       .success (data) ->
         $scope.stored_annotations = data
+        if $scope.stored_annotations.length == 0
+          $scope.annotations_show = true
+        else
+          $scope.annotations_show = false
       .error (data) ->
         console.log "Failed to get data."
 
@@ -83,6 +86,13 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
       if stock.checked is true
         checked_tickers.push stock.ticker
 
+    console.log checked_tickers.length
+    if checked_tickers.length == 0
+      console.log "count 0"
+      $scope.checked = true
+    else
+      console.log "count more"
+      $scope.checked = false
     $scope.sendToDisplay(checked_tickers)
 
     # Try the localstorage feature below
@@ -110,3 +120,6 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
 
   $scope.loadStocks()
 ])
+
+$ ->
+

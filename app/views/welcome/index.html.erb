@@ -1,7 +1,8 @@
-<p>A tool for personal investors to make annotations and journal entries so that they can <br> keep track of their thoughts and reasonings, and reflect on them at a later point.</p>
-<hr>
 <div class="row" ng-controller="StockController">
-  <div class="col-md-9 stock-chart">
+  <div class="col-md-9" id="logged-out-stock-chart" ng-show="checked">
+    ADD STOCKS<br> CLICK <strong>REFRESH CHART</strong>
+  </div>
+  <div class="col-md-9 stock-chart" ng-hide="checked">
     <div id="container" style="height: 400px; min-width: 310px"></div>
   </div>
   <br>
@@ -31,7 +32,7 @@
 <hr>
 <!-- My Annotations -->
 <div class="row below" ng-controller="AnnotationController">
-  <div class="col-md-3 annotation">
+  <div class="col-md-5 annotation">
 
 <!-- True inout board -->
     <div class="input_board user-annotations">
@@ -41,7 +42,7 @@
         <br><br>
         <input type="date" ng-model="annodate">
         <br><br>
-        <textarea ng-model="annotation" name="annotation[content]" rows="12" cols="40" placeholder="Write your note here..."></textarea>
+        <textarea ng-model="annotation" name="annotation[content]" rows="13" cols="70" placeholder="Write your note here..."></textarea>
         <br>
         <input name="commit" type="submit" value="Add Note" ng-click="submitAnnotation()">
 
@@ -51,11 +52,16 @@
 
 <!-- Displays Data -->
   <div class="search">
-    <input type="search" ng-model="search" placeholder="Search...">
-
   </div>
   <div class="col-md-7 show-annotation">
-    <div ng-repeat="object in stored_annotations | filter:search">
+    <div class="search">
+      <input type="search" ng-model="search" placeholder="Search..." size="50">
+    </div>
+    <hr>
+    <div id="logged-out-show-annotation" ng-show="annotations_show">
+      WRITE NOTE<br>CLICK <strong>ADD NOTE</strong>
+    </div>
+    <div class="annotation-row" ng-repeat="object in stored_annotations | filter:search" ng-hide="annotations_show">
       <div class="annotation_item" ng-hide="editing">
         <h3>{{object.title}}</h3>
         <div>{{object.date}}</div>
