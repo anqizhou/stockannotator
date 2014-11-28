@@ -9,13 +9,38 @@ body {
   padding: $nav-top;
 }
 
-.stock-chart{
+#logged-out-stock-chart {
+  margin-top: 18px;
+  height: 300px;
+  background-color: #eee;
+  padding-top: 3%;
+  font-size: 4em;
+  text-align: center;
+  line-height: 2
+}
+
+#logged-out-show-annotation {
+  height: 300px;
+  margin-top: 15px;
+  background-color: #eee;
+  padding-top: 3%;
+  font-size: 4em;
+  text-align: center;
+  line-height: 2
+}
+
+.stock-chart {
   background-color: white;
 }
 
-.stock-ticker{
-  background-color: #eee;
+.stock-ticker {
+  background-color: gray;
   height: 300px;
+}
+
+.stock_item {
+  color: #ABC789;
+  font-weight: bold;
 }
 
 .btn-default {
@@ -35,8 +60,14 @@ body {
   background-color: gray;
 }
 
+.annotation-row {
+  margin-bottom: 20px;
+}
+
 .annotation_item {
   background-color: #eee;
+  box-shadow: 10px 10px 5px #888888;
+  padding: 10px;
 }
 
 .show-annotation {
@@ -57,5 +88,4 @@ body {
 .search {
   width: 20%;
   float: center;
-  margin-left: -15px;
 }

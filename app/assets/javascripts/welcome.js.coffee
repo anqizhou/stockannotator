@@ -83,6 +83,13 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
       if stock.checked is true
         checked_tickers.push stock.ticker
 
+    console.log checked_tickers.length
+    if checked_tickers.length == 0
+      console.log "count 0"
+      $scope.checked = true
+    else
+      console.log "count more"
+      $scope.checked = false
     $scope.sendToDisplay(checked_tickers)
 
     # Try the localstorage feature below
@@ -110,3 +117,6 @@ Annotation.controller("StockController", ["$scope", "$http", ($scope, $http) ->
 
   $scope.loadStocks()
 ])
+
+$ ->
+
