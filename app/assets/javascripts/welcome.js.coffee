@@ -5,11 +5,14 @@
 Annotation = angular.module("myAnnotation", [])
 
 Annotation.controller("AnnotationController", ["$scope", "$http", ($scope, $http) ->
-
   $scope.loadAnnotations = ->
     $http.get('/annotations.json')
       .success (data) ->
         $scope.stored_annotations = data
+        if $scope.stored_annotations.length == 0
+          $scope.annotations_show = true
+        else
+          $scope.annotations_show = false
       .error (data) ->
         console.log "Failed to get data."
 

@@ -57,10 +57,11 @@
     <div class="search">
       <input type="search" ng-model="search" placeholder="Search..." size="50">
     </div>
- <!--    <div id="logged-out-show-annotation">
+    <hr>
+    <div id="logged-out-show-annotation" ng-show="annotations_show">
       WRITE NOTE<br>CLICK <strong>ADD NOTE</strong>
-    </div> -->
-    <div class="annotation-row" ng-repeat="object in stored_annotations | filter:search">
+    </div>
+    <div class="annotation-row" ng-repeat="object in stored_annotations | filter:search" ng-hide="annotations_show">
       <div class="annotation_item" ng-hide="editing">
         <h3>{{object.title}}</h3>
         <div>{{object.date}}</div>
